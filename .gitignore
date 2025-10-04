@@ -3,24 +3,24 @@ data/
 data_masked/
 data_raw/
 
+# Model files and checkpoints - exclude entire models directory
+models/
+!models/.gitkeep
+
 # Model files and checkpoints
-models/*.h5
-models/*.pkl
-models/*.joblib
-models/*.pth
-models/*.pt
-models/*.ckpt
-models/*.safetensors
-models/*.bin
-models/*.onnx
+*.h5
+*.pkl
+*.joblib
+*.pth
+*.pt
+*.ckpt
+*.safetensors
+*.bin
+*.onnx
 
 # Large model artifacts
-models/*/features.npy
-models/*/labels.npy
-models/*/prototypes.npz
-models/*/prototypes_meta.json
-models/*/eval_artifacts.json
-models/*/history.json
+*.npy
+*.npz
 
 # Python cache
 __pycache__/
