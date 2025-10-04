@@ -1,26 +1,10 @@
-# Data directories (containing images)
+# Data directories (containing images) - exclude only data directories
 data/
 data_masked/
 data_raw/
 
-# Model files and checkpoints - exclude entire models directory
-models/
-!models/.gitkeep
-
-# Model files and checkpoints
-*.h5
-*.pkl
-*.joblib
-*.pth
-*.pt
-*.ckpt
-*.safetensors
-*.bin
-*.onnx
-
-# Large model artifacts
-*.npy
-*.npz
+# Virtual environment
+.venv311/
 
 # Python cache
 __pycache__/

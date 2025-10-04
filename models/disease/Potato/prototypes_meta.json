@@ -1,0 +1,12 @@
+{
+  "classes": [
+    "Early_blight",
+    "Late_blight",
+    "healthy"
+  ],
+  "counts": [
+    485,
+    485,
+    456
+  ]
+}
