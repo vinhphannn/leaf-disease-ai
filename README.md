@@ -1,77 +1,142 @@
----
-title: Leaf Disease Classification
-emoji: 🌱
-colorFrom: green
-colorTo: blue
-sdk: gradio
-sdk_version: "4.0.0"
-app_file: app.py
-pinned: false
----
+# 🌱 Leaf Disease AI - Plant Pathology Classification
 
-# 🌱 Leaf Disease Classification
+Dự án phân loại bệnh cây trồng sử dụng Deep Learning với hai kiến trúc model chính: **MobileNet V3** và **EfficientNet-B3**.
 
-An AI-powered web application for identifying plant diseases from leaf images using EfficientNet-B0 deep learning model.
+## 📁 Cấu trúc dự án
 
-## 🚀 Features
+```
+leaf_disease_ai/
+├── 📊 data/                    # Dataset gốc (bị ignore)
+├── 📊 data_masked/             # Dataset đã xử lý (bị ignore)
+├── 🤖 models/                  # Thư mục chứa model đã train
+│   ├── mobilenet_v3/          # Models MobileNet V3
+│   ├── efficientnet_b3/       # Models EfficientNet-B3
+│   └── disease/               # Models theo từng loại bệnh
+├── 🔧 src/                     # Source code
+│   ├── mobilenet_v3/          # Implementation MobileNet V3
+│   │   ├── app.py            # Web app cho MobileNet V3
+│   │   ├── train.py          # Training script
+│   │   ├── train_disease.py  # Train disease classifier
+│   │   └── train_species.py  # Train species classifier
+│   ├── efficientnet_b3/       # Implementation EfficientNet-B3
+│   │   ├── app.py            # Web app cho EfficientNet-B3
+│   │   ├── model.py          # Model definition
+│   │   ├── model_b0.py       # EfficientNet-B0 variant
+│   │   ├── train_disease.py  # Train disease classifier
+│   │   └── train_species.py  # Train species classifier
+│   └── shared/                # Code chung
+│       ├── data_utils.py     # Data utilities
+│       ├── preprocess.py     # Data preprocessing
+│       ├── utils.py          # Common utilities
+│       └── evaluate.py       # Evaluation functions
+├── 🌐 app.py                  # Main web application
+├── 📋 requirements.txt        # Dependencies
+└── 📄 README.md              # This file
+```
 
-- **AI Disease Detection**: Identify 38 different plant diseases with high accuracy
-- **Grad-CAM Visualization**: See exactly where the AI focuses on the leaf
-- **Natural Language Explanations**: Get detailed explanations in Vietnamese
-- **Real-time Analysis**: Instant predictions with confidence scores
-- **Feature Analysis**: Understand which regions of the leaf are most important
+## 🚀 Cài đặt
 
-## 🔬 Supported Diseases
+```bash
+# Clone repository
+git clone https://github.com/vinhphannn/leaf-disease-ai.git
+cd leaf_disease_ai
 
-The model can identify diseases in:
-- **Apple**: Apple Scab, Black Rot, Cedar Apple Rust
-- **Tomato**: Late Blight, Early Blight, Bacterial Spot, Leaf Mold
-- **Potato**: Late Blight, Early Blight
-- **Corn**: Common Rust, Northern Leaf Blight, Cercospora Leaf Spot
-- **Grape**: Black Rot, Esca, Leaf Blight
-- **And many more...**
+# Cài đặt dependencies
+pip install -r requirements.txt
+```
 
-## 🎯 How to Use
+## 🎯 Sử dụng
 
-1. **Upload Image**: Take a clear photo of a plant leaf
-2. **Get Analysis**: The AI will analyze the image and provide:
-   - Disease prediction with confidence score
-   - Grad-CAM heatmap showing focus areas
-   - Detailed feature analysis
-   - Disease-specific information and prevention tips
+### 1. Training Models
 
-## 🛠️ Technical Details
+#### MobileNet V3 (Nhanh, nhẹ)
+```bash
+# Train species classifier
+python -m src.mobilenet_v3.train_species --data_dir data_masked --epochs 12
 
-- **Model**: EfficientNet-B0 (4.6M parameters)
-- **Accuracy**: 99.14% on validation set
-- **Framework**: PyTorch + Gradio
-- **Visualization**: Grad-CAM for interpretability
-- **Language**: Vietnamese explanations
+# Train disease classifier cho từng loại cây
+python -m src.mobilenet_v3.train_disease --data_dir data_masked --species Apple --epochs 12
+```
 
-## 📊 Model Performance
+#### EfficientNet-B3 (Chính xác cao)
+```bash
+# Train species classifier
+python -m src.efficientnet_b3.train_species --data_dir data_masked --epochs 15
 
-- **Training Data**: 70,295 images
-- **Validation Data**: 17,572 images
-- **Classes**: 38 plant diseases
-- **Architecture**: EfficientNet-B0 with custom classifier
-- **Training**: Transfer learning from ImageNet
+# Train disease classifier cho từng loại cây
+python -m src.efficientnet_b3.train_disease --data_dir data_masked --species Apple --epochs 15
+```
 
-## 🔍 Interpretability
+### 2. Chạy Web Application
 
-The application provides:
-- **Grad-CAM heatmaps** showing where the model focuses
-- **Region analysis** with position and intensity descriptions
-- **Natural language explanations** of the AI's reasoning
-- **Disease-specific information** and prevention tips
+```bash
+# Chạy app chính (hỗ trợ cả hai model)
+python app.py
 
-## 🚀 Deployment
+# Hoặc chạy riêng từng model
+python -m src.mobilenet_v3.app
+python -m src.efficientnet_b3.app
+```
 
-This application is deployed on Hugging Face Spaces for easy access and sharing.
+## 📊 Models
 
-## 📝 License
+### MobileNet V3
+- **Ưu điểm**: Nhanh, nhẹ, phù hợp mobile/edge devices
+- **Sử dụng**: Khi cần tốc độ và tiết kiệm tài nguyên
+- **Accuracy**: ~85-90%
 
-This project is open source and available under the MIT License.
+### EfficientNet-B3
+- **Ưu điểm**: Chính xác cao, state-of-the-art performance
+- **Sử dụng**: Khi cần độ chính xác tối đa
+- **Accuracy**: ~92-95%
+
+## 🌿 Supported Plants & Diseases
+
+### Plants (14 loại)
+- Apple, Blueberry, Cherry, Corn (maize)
+- Grape, Orange, Peach, Pepper (bell)
+- Potato, Raspberry, Soybean, Squash
+- Strawberry, Tomato
+
+### Diseases
+Mỗi loại cây có các bệnh đặc trưng, ví dụ:
+- **Apple**: Apple scab, Black rot, Cedar apple rust, Healthy
+- **Tomato**: Bacterial spot, Early blight, Late blight, Leaf Mold, etc.
+- **Potato**: Early blight, Late blight, Healthy
+
+## 🔧 Features
+
+- ✅ **Dual Model Support**: MobileNet V3 + EfficientNet-B3
+- ✅ **Web Interface**: Gradio-based UI
+- ✅ **Batch Processing**: Xử lý nhiều ảnh cùng lúc
+- ✅ **Confidence Scores**: Hiển thị độ tin cậy
+- ✅ **Heatmap Visualization**: Giải thích kết quả
+- ✅ **Model Comparison**: So sánh hiệu suất
+- ✅ **Export Results**: Xuất kết quả CSV
+
+## 📈 Performance
+
+| Model | Accuracy | Speed | Size | Use Case |
+|-------|----------|-------|------|----------|
+| MobileNet V3 | ~87% | ⚡⚡⚡ | 5MB | Mobile/Edge |
+| EfficientNet-B3 | ~94% | ⚡⚡ | 25MB | Desktop/Server |
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+1. Fork repository
+2. Tạo feature branch
+3. Commit changes
+4. Push và tạo Pull Request
+
+## 📄 License
+
+MIT License - Xem file LICENSE để biết thêm chi tiết.
+
+## 📞 Contact
+
+- GitHub: [@vinhphannn](https://github.com/vinhphannn)
+- Project: [Leaf Disease AI](https://github.com/vinhphannn/leaf-disease-ai)
+
+---
+
+**🌱 Giúp nông dân phát hiện bệnh cây trồng sớm và chính xác!**
