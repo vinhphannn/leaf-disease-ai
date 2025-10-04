@@ -1,0 +1,10 @@
+{
+  "title": "Leaf Disease Classification",
+  "description": "AI-powered plant disease detection using EfficientNet-B0",
+  "sdk": "gradio",
+  "sdk_version": "4.0.0",
+  "app_file": "app.py",
+  "hardware": "cpu-basic",
+  "license": "mit",
+  "tags": ["computer-vision", "health", "agriculture", "pytorch"]
+}

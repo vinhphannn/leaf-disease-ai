@@ -1,0 +1,14 @@
+{
+  "classes": [
+    "healthy"
+  ],
+  "confusion_matrix": [
+    [
+      505
+    ]
+  ],
+  "per_class_accuracy": [
+    1.0
+  ],
+  "overall_accuracy": 1.0
+}

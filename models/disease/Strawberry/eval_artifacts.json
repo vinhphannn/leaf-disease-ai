@@ -1,0 +1,21 @@
+{
+  "classes": [
+    "Leaf_scorch",
+    "healthy"
+  ],
+  "confusion_matrix": [
+    [
+      444,
+      0
+    ],
+    [
+      0,
+      456
+    ]
+  ],
+  "per_class_accuracy": [
+    1.0,
+    1.0
+  ],
+  "overall_accuracy": 1.0
+}

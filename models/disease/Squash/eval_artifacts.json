@@ -1,0 +1,14 @@
+{
+  "classes": [
+    "Powdery_mildew"
+  ],
+  "confusion_matrix": [
+    [
+      434
+    ]
+  ],
+  "per_class_accuracy": [
+    1.0
+  ],
+  "overall_accuracy": 1.0
+}

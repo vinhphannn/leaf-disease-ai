@@ -1,0 +1,14 @@
+{
+  "classes": [
+    "Haunglongbing_(Citrus_greening)"
+  ],
+  "confusion_matrix": [
+    [
+      503
+    ]
+  ],
+  "per_class_accuracy": [
+    1.0
+  ],
+  "overall_accuracy": 1.0
+}

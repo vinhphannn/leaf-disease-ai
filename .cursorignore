@@ -1,0 +1,16 @@
+# Large datasets and generated artifacts
+data/**
+.git/**
+__pycache__/**
+
+# Model binaries (keep models/ for now)
+# models/**
+*.pt
+*.onnx
+
+# Images and archives
+*.jpg
+*.JPG
+*.jpeg
+*.png
+*.zip

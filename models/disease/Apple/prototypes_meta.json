@@ -1,0 +1,14 @@
+{
+  "classes": [
+    "Apple_scab",
+    "Black_rot",
+    "Cedar_apple_rust",
+    "healthy"
+  ],
+  "counts": [
+    504,
+    497,
+    440,
+    502
+  ]
+}
